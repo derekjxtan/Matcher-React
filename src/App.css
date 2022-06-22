@@ -42,10 +42,7 @@
   background-color: black;
   height: 100px;
   font-size: large;
-}
-
-.navbar-toggler {
-  width: fit-content;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 .collapse {
@@ -56,14 +53,26 @@
 .footer {
   background-color: black;
   color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
+  border-top: 1px solid rgb(255, 255, 255);
 }
 
 .link {
   color: white;
+}
+
+.container {
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.row {
+  color: white;
+}
+
+.col {
+  margin-left: 10px;
 }
