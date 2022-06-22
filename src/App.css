@@ -52,3 +52,18 @@
   background-color: black;
   padding-left: 15px;
 }
+
+.footer {
+  background-color: black;
+  color: white;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.link {
+  color: white;
+}

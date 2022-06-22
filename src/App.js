@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
 import Header from './components/header';
+import Footer from './components/footer';
 
 // map the store state to props so that components can access them
 function mapStateToProps(state) {
@@ -22,6 +23,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Footer />
       </div>
     );
   }
