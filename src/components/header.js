@@ -36,23 +36,23 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/aboutus'>
-                                        About Us
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink className='nav-link' to='/menu'>
+                                    <NavLink className='nav-link' to='/newmatch'>
                                         Create New Match
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/favourites'>
+                                    <NavLink className='nav-link' to='/matches'>
                                         Matches
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/contactus'>
+                                    <NavLink className='nav-link' to='/Feedback'>
                                         Feedback
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className='nav-link' to='/about'>
+                                        About
                                     </NavLink>
                                 </NavItem>
                             </Nav> 
