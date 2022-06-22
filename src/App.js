@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
+import About from './components/about';
 
 // map the store state to props so that components can access them
 function mapStateToProps(state) {
@@ -26,6 +27,7 @@ class App extends Component {
       <div>
         <Header />
         <Home />
+        <About />
         <Footer />
       </div>
     );
