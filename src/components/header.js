@@ -31,27 +31,27 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/home'>
+                                    <NavLink className='nav-link' href='/home'>
                                         Home
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/newmatch'>
+                                    <NavLink className='nav-link' href='/newmatch'>
                                         Create New Match
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/matches'>
+                                    <NavLink className='nav-link' href='/matches'>
                                         Matches
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/Feedback'>
+                                    <NavLink className='nav-link' href='/Feedback'>
                                         Feedback
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className='nav-link' to='/about'>
+                                    <NavLink className='nav-link' href='/about'>
                                         About
                                     </NavLink>
                                 </NavItem>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './App.css';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
@@ -26,8 +27,11 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Home />
-        <About />
+        <Routes>
+          <Route path='/home' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='*' element={<Navigate to='/home' replace />} />
+        </Routes>
         <Footer />
       </div>
     );
