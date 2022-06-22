@@ -37,3 +37,17 @@
     transform: translateY(0px);
   }
 }
+
+.navbar-dark {
+  background-color: black;
+  height: 100px;
+}
+
+.navbar-toggler {
+  width: fit-content;
+}
+
+.collapse {
+  background-color: black;
+  padding-left: 15px;
+}
