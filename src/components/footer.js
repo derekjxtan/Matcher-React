@@ -12,6 +12,7 @@ function Footer(props) {
                             <li><Link to='/home' className='link'>Home</Link></li>
                             <li><Link to='/newmatch' className='link'>Create New Match</Link></li>
                             <li><Link to='/matches' className='link'>Matches</Link></li>
+                            <li><Link to='/submit' className='link'>Submit</Link></li>
                             <li><Link to='/feedback' className='link'>Feedback</Link></li>
                             <li><Link to='/about' className='link'>About</Link></li>
                         </ul>
