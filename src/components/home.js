@@ -3,7 +3,7 @@ import React from 'react';
 function Home(props) {
     return (
         <div className='container'>
-            <div className='row'>
+            <div className='row-content'>
                 <h1>Welcome to Matcher.</h1>
                 <p>
                     The purpose of this project is to provide a service for people to match 
@@ -13,7 +13,7 @@ function Home(props) {
                     of.
                 </p>
             </div>
-            <div className='row'>
+            <div className='row-content'>
                 <h2>If you're a Matcher:</h2>
                 <p>
                     Login or Register to start creating a new match. This is to ensure that 
@@ -25,7 +25,7 @@ function Home(props) {
                     already created, click on "Matches" to view your Matches.
                 </p>
             </div>
-            <div className='row'>
+            <div className='row-last'>
                 <h2>If you're a Matchee:</h2>
                 <p>
                     Click on "Submit Response" in order to submit your inputs for a created 

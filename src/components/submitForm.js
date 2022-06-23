@@ -39,7 +39,7 @@ class SubmitForm extends Component {
         );
 
         const PageHeader = () => (
-            <div className='row'>
+            <div className='row-content'>
                 <h1>Submit.</h1>
                 <p>Enter the Match ID given to you into the form below.</p>
             </div>

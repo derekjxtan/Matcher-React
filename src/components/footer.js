@@ -5,7 +5,7 @@ function Footer(props) {
     return (
         <div className='footer'>
             <div className='container'>
-                <div className='row'>
+                <div className='row-last'>
                     <div className='col-md-5'>
                         <h5>Links</h5>
                         <ul className='list-unstyled'>
