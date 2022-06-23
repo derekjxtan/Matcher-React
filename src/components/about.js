@@ -1,8 +1,16 @@
 import React from 'react';
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function About(props) {
     return (
         <div className='container'>
+            <div>
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to='/home' className='link'>Home</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>About</BreadcrumbItem>
+                </Breadcrumb>
+            </div>
             <div className='row'>
                 <h1>About.</h1>
             </div>
