@@ -51,7 +51,6 @@
 }
 
 .footer {
-  background-color: black;
   color: white;
   left: 0;
   bottom: 0;
@@ -71,6 +70,13 @@
 
 .row {
   color: white;
+  border-bottom: 1px ridge rgb(255, 255, 255);
+  padding-top: 10px;
+}
+
+.row-last {
+  color: white;
+  padding-top: 10px;
 }
 
 .col {

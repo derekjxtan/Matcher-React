@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
+import SubmitForm from './components/submitForm';
 import About from './components/about';
 
 // map the store state to props so that components can access them
@@ -29,6 +30,7 @@ class App extends Component {
         <Header />
         <Routes>
           <Route path='/home' element={<Home />} />
+          <Route exact path='/submit' element={<SubmitForm />} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<Navigate to='/home' replace />} />
         </Routes>
