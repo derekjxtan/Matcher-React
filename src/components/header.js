@@ -16,6 +16,7 @@ class Header extends Component {
         this.toggleRegister = this.toggleRegister.bind(this);
         this.login = this.login.bind(this);
         this.register = this.register.bind(this);
+        this.logout = this.logout.bind(this);
     };
 
     toggleNav() {
@@ -40,6 +41,7 @@ class Header extends Component {
         this.toggleLogin();
         const resp = JSON.stringify({username: this.username.value, password: this.password.value});
         alert('Login: ' + resp);
+        this.props.loginUser({username: this.username.value, password: this.password.value});
         event.preventDefault();
     }
 
@@ -47,6 +49,12 @@ class Header extends Component {
         this.toggleRegister();
         const resp = JSON.stringify({username: this.username.value, password: this.password.value});
         alert('Register: ' + resp);
+        this.props.registerUser(resp);
+        event.preventDefault();
+    }
+
+    logout = (event) => {
+        this.props.logoutUser();
         event.preventDefault();
     }
 
@@ -93,10 +101,20 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                         </Nav> 
-                        <Nav className='ms-auto' navbar>
+                        <Nav className='ms-auto pb-2' navbar>
                             <NavItem>
-                                <Button className='me-3' onClick={this.toggleRegister}>Register</Button>
-                                <Button onClick={this.toggleLogin}>Login</Button>
+                                {
+                                    !this.props.auth.isAuthenticated ? 
+                                    <div>
+                                        <Button className='me-3' onClick={this.toggleRegister}>Register</Button>
+                                        <Button onClick={this.toggleLogin}>Login</Button>
+                                    </div>
+                                    :
+                                    <div className='d-flex justify-content-start'>
+                                        <div className='navbar-text me-3'>Welcome, {this.props.auth.username}</div>
+                                        <Button onClick={this.logout}>Logout</Button>
+                                    </div>
+                                }
                             </NavItem>
                         </Nav>   
                     </Collapse>
