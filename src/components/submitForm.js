@@ -6,12 +6,7 @@ class SubmitForm extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            idExists: false
-        };
-
         this.search = this.search.bind(this);
-        this.matchFound = this.matchFound.bind(this);
     }
 
     search(event) {
@@ -20,14 +15,8 @@ class SubmitForm extends Component {
         // otherwise just load input matchid again
         const resp = JSON.stringify({matchid: this.matchid.value});
         alert('Search: ' + resp);
-        this.matchFound();
+        this.props.fetchSingleMatch(this.matchid.value);
         event.preventDefault();
-    }
-
-    matchFound() {
-        this.setState({
-            idExists: !this.state.idExists
-        })
     }
 
     render() {
@@ -58,22 +47,12 @@ class SubmitForm extends Component {
                 </Form>
             </div>
         );
-
-        const MatchDetailsForm = () => (
-            <div className="row-last">
-                <h1>Hello, implement this form later</h1>
-            </div>
-        );
         
         return (
             <div className="container">
                 <PageBreadcrumb />
                 <PageHeader />
-                {!this.state.idExists ?
-                    <IDForm />
-                    :
-                    <MatchDetailsForm />
-                }
+                <IDForm />
             </div>
         );
     }

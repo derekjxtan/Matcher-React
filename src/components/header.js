@@ -104,14 +104,14 @@ class Header extends Component {
                         <Nav className='ms-auto pb-2' navbar>
                             <NavItem>
                                 {
-                                    !this.props.auth.isAuthenticated ? 
+                                    !this.props.Auth.isAuthenticated ? 
                                     <div>
                                         <Button className='me-3' onClick={this.toggleRegister}>Register</Button>
                                         <Button onClick={this.toggleLogin}>Login</Button>
                                     </div>
                                     :
                                     <div className='d-flex justify-content-start'>
-                                        <div className='navbar-text me-3'>Welcome, {this.props.auth.username}</div>
+                                        <div className='navbar-text me-3'>Welcome, {this.props.Auth.username}</div>
                                         <Button onClick={this.logout}>Logout</Button>
                                     </div>
                                 }

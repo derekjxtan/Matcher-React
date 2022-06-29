@@ -5,15 +5,18 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
+import NewMatch from './components/newMatch';
 import SubmitForm from './components/submitForm';
 import FeedbackForm from './components/feedbackForm';
 import About from './components/about';
-import { loginUser, logoutUser, registerUser } from './reducers/ActionCreators';
+import { loginUser, logoutUser, registerUser, postNewComment, fetchSingleMatch } from './reducers/ActionCreators';
 
 // map the store state to props so that components can access them
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    Auth: state.Auth,
+    AllMatches: state.AllMatches,
+    SingleMatch: state.SingleMatch,
   }
 };
 
@@ -22,7 +25,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loginUser: (creds) => dispatch(loginUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
-    registerUser: (creds) => dispatch(registerUser(creds))
+    registerUser: (creds) => dispatch(registerUser(creds)),
+    postNewComment: (match) => dispatch(postNewComment(match)),
+    fetchSingleMatch: (matchid) => dispatch(fetchSingleMatch(matchid)),
   }
 };
 
@@ -36,14 +41,15 @@ class App extends Component {
     return (
       <div>
         <Header 
-          auth={this.props.auth} 
+          Auth={this.props.Auth} 
           loginUser={this.props.loginUser} 
           logoutUser={this.props.logoutUser}
           registerUser={this.props.registerUser}
         />
         <Routes>
           <Route path='/home' element={<Home />} />
-          <Route exact path='/submit' element={<SubmitForm />} />
+          <Route path='/newmatch' element={<NewMatch postNewComment={this.props.postNewComment}/>} />
+          <Route exact path='/submit' element={<SubmitForm fetchSingleMatch={this.props.fetchSingleMatch}/>} />
           <Route path='/feedback' element={<FeedbackForm />} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<Navigate to='/home' replace />} />

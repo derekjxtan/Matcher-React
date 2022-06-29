@@ -43,6 +43,7 @@ export const loginUser = (creds) => (dispatch) => {
         if (resp.success) {
             localStorage.setItem('token', resp.token);
             localStorage.setItem('username', JSON.stringify(creds.username));
+            dispatch(fetchAllMatches());
             dispatch(loginSuccess(resp));
         }
         else {
@@ -105,5 +106,136 @@ export const registerUser = (creds) => (dispatch) => {
     .catch((err) => {
         console.log(err);
         return err;
+    });
+};
+
+// SINGLE MATCH actions
+export const singleMatchLoading = () => ({
+    type: ActionTypes.SINGLE_MATCH_LOADING
+});
+
+export const singleMatchSuccess = (resp) => ({
+    type: ActionTypes.SINGLE_MATCH_SUCCESS,
+    match: resp
+});
+
+export const singleMatchFailed = (message) => ({
+    type: ActionTypes.SINGLE_MATCH_FAILED,
+    message: message
+});
+
+export const fetchSingleMatch = (matchid) => (dispatch) => {
+    dispatch(singleMatchLoading());
+
+    const token = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'match/' + matchid, {
+        method: 'GET',
+        headers: {
+            'Authorization': token,
+        }
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }, error => {
+        var err = new Error(error.message);
+        throw err;
+    })
+    .then((response) => response.json())
+    .then((match) => dispatch(singleMatchSuccess(match)))
+    .catch((err) => dispatch(singleMatchFailed(err.message)));
+};
+
+// ALL MATCHES actions
+export const allMatchesLoading = () => ({
+    type: ActionTypes.ALL_MATCHES_LOADING
+});
+
+export const allMatchesSuccess = (resp) => ({
+    type: ActionTypes.ALL_MATCHES_SUCCESS,
+    matches: resp
+});
+
+export const allMatchesFailed = (message) => ({
+    type: ActionTypes.ALL_MATCHES_FAILED,
+    message: message
+});
+
+export const fetchAllMatches = () => (dispatch) => {
+    dispatch(allMatchesLoading());
+
+    const token = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'match', {
+        headers: {
+            'Authorization': token,
+        }
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response;
+        }
+        else {
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }, error => {
+        var err = new Error(error.message);
+        throw err;
+    })
+    .then((response) => response.json())
+    .then((matches) => dispatch(allMatchesSuccess(matches)))
+    .catch((err) => dispatch(allMatchesFailed(err.message)));
+};
+
+export const postNewComment = (match) => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    const newMatch = {
+        name: match.name,
+        description: match.description,
+        set1label: match.set1label,
+        set1items: match.set1items,
+        set2label: match.set2label,
+        set2items: match.set2items
+    };
+    return fetch(baseUrl + 'match', {
+        method: 'POST',
+        body: JSON.stringify(newMatch),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => response.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('Post newMatch', error.message);
+        alert('Your New Match could not be posted\nError: ' + error.message);
+    });
+};
+
+export const deleteAllComments = () => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    return fetch(baseUrl + 'match', {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => response.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('DELETE matches', error.message);
+        alert('Your matches could not be posted\nError: ' + error.message);
     });
 };
