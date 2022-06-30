@@ -6,10 +6,18 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Home from './components/home';
 import NewMatch from './components/newMatch';
+import Matches from './components/matches';
 import SubmitForm from './components/submitForm';
 import FeedbackForm from './components/feedbackForm';
 import About from './components/about';
-import { loginUser, logoutUser, registerUser, postNewComment, fetchSingleMatch } from './reducers/ActionCreators';
+import { 
+  loginUser, 
+  logoutUser, 
+  registerUser, 
+  postNewMatch, 
+  fetchSingleMatch,
+  deleteSingleMatch,
+} from './reducers/ActionCreators';
 
 // map the store state to props so that components can access them
 function mapStateToProps(state) {
@@ -26,8 +34,9 @@ const mapDispatchToProps = (dispatch) => {
     loginUser: (creds) => dispatch(loginUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
     registerUser: (creds) => dispatch(registerUser(creds)),
-    postNewComment: (match) => dispatch(postNewComment(match)),
+    postNewMatch: (match) => dispatch(postNewMatch(match)),
     fetchSingleMatch: (matchid) => dispatch(fetchSingleMatch(matchid)),
+    deleteSingleMatch: (matchid) => dispatch(deleteSingleMatch(matchid)),
   }
 };
 
@@ -48,7 +57,8 @@ class App extends Component {
         />
         <Routes>
           <Route path='/home' element={<Home />} />
-          <Route path='/newmatch' element={<NewMatch postNewComment={this.props.postNewComment}/>} />
+          <Route path='/newmatch' element={<NewMatch postNewMatch={this.props.postNewMatch}/>} />
+          <Route path='/matches' element={<Matches AllMatches={this.props.AllMatches} deleteSingleMatch={this.props.deleteSingleMatch}/>} />
           <Route exact path='/submit' element={<SubmitForm fetchSingleMatch={this.props.fetchSingleMatch}/>} />
           <Route path='/feedback' element={<FeedbackForm />} />
           <Route path='/about' element={<About />} />

@@ -196,7 +196,7 @@ export const fetchAllMatches = () => (dispatch) => {
     .catch((err) => dispatch(allMatchesFailed(err.message)));
 };
 
-export const postNewComment = (match) => (dispatch) => {
+export const postNewMatch = (match) => (dispatch) => {
     const token = 'Bearer ' + localStorage.getItem('token');
     const newMatch = {
         name: match.name,
@@ -223,9 +223,26 @@ export const postNewComment = (match) => (dispatch) => {
     });
 };
 
-export const deleteAllComments = () => (dispatch) => {
+export const deleteAllMatches = () => (dispatch) => {
     const token = 'Bearer ' + localStorage.getItem('token');
     return fetch(baseUrl + 'match', {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) => response.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('DELETE matches', error.message);
+        alert('Your matches could not be posted\nError: ' + error.message);
+    });
+};
+
+export const deleteSingleMatch = (matchid) => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    return fetch(baseUrl + 'match/' + matchid, {
         method: 'DELETE',
         headers: {
             'Authorization': token

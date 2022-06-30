@@ -20,7 +20,7 @@ class NewMatch extends Component {
             set2items: this.set2items.value,
         };
         alert('New Match: ' + JSON.stringify(resp));
-        this.props.postNewComment(resp);
+        this.props.postNewMatch(resp);
         event.preventDefault();
     };
 
