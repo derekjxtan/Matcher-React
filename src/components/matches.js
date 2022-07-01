@@ -7,6 +7,10 @@ class Matches extends Component {
         super(props)
     };
 
+    componentDidMount () {
+        this.props.fetchAllMatches();
+    }
+ 
     render() {
         const PageBreadcrumb = () => (
             <Breadcrumb>
@@ -30,7 +34,6 @@ class Matches extends Component {
                             <CardHeader className="d-flex">
                                 <h3>{match.name}</h3>
                                 <div className="ms-auto">
-                                    {/* <Button color="danger" onClick={this.deleteMatch} className='me-2'>Delete</Button> */}
                                     <Button color="danger" onClick={() => this.props.deleteSingleMatch(match._id)} className='me-2'>Delete</Button>
                                     <Link to={`/matches/${match._id}/edit`} className='btn btn-primary me-2'>Edit</Link>
                                     <Link to={`/matches/${match._id}/results`} className='btn btn-success'>View Results</Link>

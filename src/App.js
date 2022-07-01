@@ -7,13 +7,15 @@ import Footer from './components/footer';
 import Home from './components/home';
 import NewMatch from './components/newMatch';
 import Matches from './components/matches';
-import SubmitForm from './components/submitForm';
+import MatchSearchForm from './components/matchSearchForm';
+import MatchInputSubmitForm from './components/matchInputSubmitForm';
 import FeedbackForm from './components/feedbackForm';
 import About from './components/about';
 import { 
   loginUser, 
   logoutUser, 
   registerUser, 
+  fetchAllMatches,
   postNewMatch, 
   fetchSingleMatch,
   deleteSingleMatch,
@@ -34,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
     loginUser: (creds) => dispatch(loginUser(creds)),
     logoutUser: () => dispatch(logoutUser()),
     registerUser: (creds) => dispatch(registerUser(creds)),
+    fetchAllMatches: () => dispatch(fetchAllMatches()),
     postNewMatch: (match) => dispatch(postNewMatch(match)),
     fetchSingleMatch: (matchid) => dispatch(fetchSingleMatch(matchid)),
     deleteSingleMatch: (matchid) => dispatch(deleteSingleMatch(matchid)),
@@ -58,8 +61,9 @@ class App extends Component {
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/newmatch' element={<NewMatch postNewMatch={this.props.postNewMatch}/>} />
-          <Route path='/matches' element={<Matches AllMatches={this.props.AllMatches} deleteSingleMatch={this.props.deleteSingleMatch}/>} />
-          <Route exact path='/submit' element={<SubmitForm fetchSingleMatch={this.props.fetchSingleMatch}/>} />
+          <Route path='/matches' element={<Matches AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} deleteSingleMatch={this.props.deleteSingleMatch}/>} />
+          <Route exact path='/search' element={<MatchSearchForm SingleMatch={this.props.SingleMatch} fetchSingleMatch={this.props.fetchSingleMatch}/>} />
+          <Route exact path='/search/input' element={<MatchInputSubmitForm SingleMatch={this.props.SingleMatch}/>} />
           <Route path='/feedback' element={<FeedbackForm />} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<Navigate to='/home' replace />} />

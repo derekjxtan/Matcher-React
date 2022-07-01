@@ -86,8 +86,8 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink className='nav-link' href='/submit'>
-                                    Submit
+                                <NavLink className='nav-link' href='/search'>
+                                    Search
                                 </NavLink>
                             </NavItem>
                             <NavItem>
