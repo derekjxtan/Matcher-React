@@ -256,3 +256,23 @@ export const deleteSingleMatch = (matchid) => (dispatch) => {
         alert('Your matches could not be posted\nError: ' + error.message);
     });
 };
+
+export const putSingleMatch = (matchid, editedMatch) => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    console.log(JSON.stringify(editedMatch));
+    return fetch(baseUrl + 'match/' + matchid, {
+        method: 'PUT',
+        body: JSON.stringify(editedMatch),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((resp) => resp.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('PUT matches', error.message);
+        alert('Your match could not be edited\nError: ' + error.message);
+    });
+};

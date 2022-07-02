@@ -42,6 +42,8 @@ class Matches extends Component {
                             <CardBody>
                                 <h5 className='card-title'>{match.description}</h5>
                                 <p>
+                                    <b>ID:</b> {match._id}
+                                    <br></br>
                                     <b>Created at:</b> {match.createdAt}
                                     <br></br>
                                     <b>Set 1 Label:</b> {match.set1label}
