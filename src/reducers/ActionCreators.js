@@ -154,6 +154,7 @@ export const fetchSingleMatch = (matchid) => (dispatch) => {
 };
 
 // ALL MATCHES actions
+// Match actions
 export const allMatchesLoading = () => ({
     type: ActionTypes.ALL_MATCHES_LOADING
 });
@@ -259,7 +260,6 @@ export const deleteSingleMatch = (matchid) => (dispatch) => {
 
 export const putSingleMatch = (matchid, editedMatch) => (dispatch) => {
     const token = 'Bearer ' + localStorage.getItem('token');
-    console.log(JSON.stringify(editedMatch));
     return fetch(baseUrl + 'match/' + matchid, {
         method: 'PUT',
         body: JSON.stringify(editedMatch),
@@ -274,5 +274,40 @@ export const putSingleMatch = (matchid, editedMatch) => (dispatch) => {
     .catch((error) => {
         console.log('PUT matches', error.message);
         alert('Your match could not be edited\nError: ' + error.message);
+    });
+};
+
+// Response actions
+export const deleteAllResponses = (matchid) => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    return fetch(baseUrl + 'match/' + matchid + '/response', {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((resp) => resp.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('DELETE responses', error.message);
+        alert('Your responses could not be deleted\nError: ' + error.message);
+    });
+};
+
+export const deleteSingleResponse = (matchid, responseid) => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    return fetch(baseUrl + 'match/' + matchid + '/response/' + responseid, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        },
+        credentials: 'same-origin'
+    })
+    .then((resp) => resp.json())
+    .then((match) => dispatch(fetchAllMatches()))
+    .catch((error) => {
+        console.log('DELETE response', error.message);
+        alert('Your response could not be deleted\nError: ' + error.message);
     });
 };

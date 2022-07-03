@@ -8,6 +8,7 @@ import Home from './components/home';
 import NewMatch from './components/newMatch';
 import Matches from './components/matches';
 import EditMatchPage from './components/editMatch';
+import ResponsesPage from './components/matchResponse';
 import MatchSearchForm from './components/matchSearchForm';
 import MatchInputSubmitForm from './components/matchInputSubmitForm';
 import FeedbackForm from './components/feedbackForm';
@@ -21,6 +22,8 @@ import {
   fetchSingleMatch,
   deleteSingleMatch,
   putSingleMatch,
+  deleteAllResponses,
+  deleteSingleResponse,
 } from './reducers/ActionCreators';
 
 // map the store state to props so that components can access them
@@ -43,6 +46,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchSingleMatch: (matchid) => dispatch(fetchSingleMatch(matchid)),
     deleteSingleMatch: (matchid) => dispatch(deleteSingleMatch(matchid)),
     putSingleMatch: (matchid, editedMatch) => dispatch(putSingleMatch(matchid, editedMatch)),
+    deleteAllResponses: (matchid) => dispatch(deleteAllResponses(matchid)),
+    deleteSingleResponse: (matchid, responseid) => dispatch(deleteSingleResponse(matchid, responseid)),
   }
 };
 
@@ -66,6 +71,7 @@ class App extends Component {
           <Route path='/newmatch' element={<NewMatch postNewMatch={this.props.postNewMatch}/>} />
           <Route exact path='/matches' element={<Matches AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} deleteSingleMatch={this.props.deleteSingleMatch}/>} />
           <Route path='/matches/:matchId/edit' element={<EditMatchPage AllMatches={this.props.AllMatches} putSingleMatch={this.props.putSingleMatch}/>} />
+          <Route path='/matches/:matchId/responses' element={<ResponsesPage AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} deleteAllResponses={this.props.deleteAllResponses} deleteSingleResponse={this.props.deleteSingleResponse}/>} />
           <Route exact path='/search' element={<MatchSearchForm SingleMatch={this.props.SingleMatch} fetchSingleMatch={this.props.fetchSingleMatch}/>} />
           <Route exact path='/search/input' element={<MatchInputSubmitForm SingleMatch={this.props.SingleMatch}/>} />
           <Route path='/feedback' element={<FeedbackForm />} />

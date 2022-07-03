@@ -36,6 +36,7 @@ class Matches extends Component {
                                 <div className="ms-auto">
                                     <Button color="danger" onClick={() => this.props.deleteSingleMatch(match._id)} className='me-2'>Delete</Button>
                                     <Link to={`/matches/${match._id}/edit`} className='btn btn-primary me-2'>Edit</Link>
+                                    <Link to={`/matches/${match._id}/responses`} className='btn btn-success me-2'>View Responses</Link>
                                     <Link to={`/matches/${match._id}/results`} className='btn btn-success'>View Results</Link>
                                 </div>
                             </CardHeader>
