@@ -278,6 +278,17 @@ export const putSingleMatch = (matchid, editedMatch) => (dispatch) => {
 };
 
 // Response actions
+export const postSingleResponse = (matchid, response) => (dispatch) => {
+    return fetch(baseUrl + 'match/' + matchid + '/response', {
+        method: 'POST',
+        body: response,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin'
+    })
+}
+
 export const deleteAllResponses = (matchid) => (dispatch) => {
     const token = 'Bearer ' + localStorage.getItem('token');
     return fetch(baseUrl + 'match/' + matchid + '/response', {
@@ -309,5 +320,13 @@ export const deleteSingleResponse = (matchid, responseid) => (dispatch) => {
     .catch((error) => {
         console.log('DELETE response', error.message);
         alert('Your response could not be deleted\nError: ' + error.message);
+    });
+};
+
+export const fetchResults = (matchid) => (dispatch) => {
+    return fetch(baseUrl + 'match/' + matchid + '/result')
+    .catch((error) => {
+        console.log('GET ressults', error.message);
+        alert('Your results could not be generated\nError: ' + error.message);
     });
 };

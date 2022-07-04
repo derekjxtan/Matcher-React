@@ -9,6 +9,7 @@ import NewMatch from './components/newMatch';
 import Matches from './components/matches';
 import EditMatchPage from './components/editMatch';
 import ResponsesPage from './components/matchResponse';
+import ResultsPage from './components/matchResult';
 import MatchSearchForm from './components/matchSearchForm';
 import MatchInputSubmitForm from './components/matchInputSubmitForm';
 import FeedbackForm from './components/feedbackForm';
@@ -22,8 +23,10 @@ import {
   fetchSingleMatch,
   deleteSingleMatch,
   putSingleMatch,
+  postSingleResponse,
   deleteAllResponses,
   deleteSingleResponse,
+  fetchResults,
 } from './reducers/ActionCreators';
 
 // map the store state to props so that components can access them
@@ -46,8 +49,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchSingleMatch: (matchid) => dispatch(fetchSingleMatch(matchid)),
     deleteSingleMatch: (matchid) => dispatch(deleteSingleMatch(matchid)),
     putSingleMatch: (matchid, editedMatch) => dispatch(putSingleMatch(matchid, editedMatch)),
+    postSingleResponse: (matchid, response) => dispatch(postSingleResponse(matchid, response)),
     deleteAllResponses: (matchid) => dispatch(deleteAllResponses(matchid)),
     deleteSingleResponse: (matchid, responseid) => dispatch(deleteSingleResponse(matchid, responseid)),
+    fetchResults: (matchid) => dispatch(fetchResults(matchid)),
   }
 };
 
@@ -72,8 +77,9 @@ class App extends Component {
           <Route exact path='/matches' element={<Matches AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} deleteSingleMatch={this.props.deleteSingleMatch}/>} />
           <Route path='/matches/:matchId/edit' element={<EditMatchPage AllMatches={this.props.AllMatches} putSingleMatch={this.props.putSingleMatch}/>} />
           <Route path='/matches/:matchId/responses' element={<ResponsesPage AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} deleteAllResponses={this.props.deleteAllResponses} deleteSingleResponse={this.props.deleteSingleResponse}/>} />
+          <Route path='/matches/:matchId/results' element={<ResultsPage AllMatches={this.props.AllMatches} fetchAllMatches={this.props.fetchAllMatches} fetchResults={this.props.fetchResults}/>} />
           <Route exact path='/search' element={<MatchSearchForm SingleMatch={this.props.SingleMatch} fetchSingleMatch={this.props.fetchSingleMatch}/>} />
-          <Route exact path='/search/input' element={<MatchInputSubmitForm SingleMatch={this.props.SingleMatch}/>} />
+          <Route exact path='/search/input' element={<MatchInputSubmitForm SingleMatch={this.props.SingleMatch} postSingleResponse={this.props.postSingleResponse}/>} />
           <Route path='/feedback' element={<FeedbackForm />} />
           <Route path='/about' element={<About />} />
           <Route path='*' element={<Navigate to='/home' replace />} />

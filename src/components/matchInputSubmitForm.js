@@ -21,6 +21,7 @@ class MatchInputSubmitForm extends Component {
         const resp = JSON.stringify({parent: this.set1.value, children: children});
         alert(resp);
         console.log(resp)
+        this.props.postSingleResponse(this.props.SingleMatch.match._id, resp);
         event.preventDefault();
     }
 
