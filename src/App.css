@@ -98,3 +98,28 @@
   list-style-type: none;
   padding-left: 0px;
 }
+
+.btn {
+  background-color: #808080;
+  box-shadow: 0 5px 0 #454545;
+}
+
+.btn-danger {
+  background-color: #ff0000;
+  box-shadow: 0 5px 0 #b80000;
+}
+
+.btn-primary {
+  background-color: #0000ff;
+  box-shadow: 0 5px 0 #000088;
+}
+
+.btn-success {
+  background-color: #008000;
+  box-shadow: 0 5px 0 #005600;
+}
+
+.btn:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}

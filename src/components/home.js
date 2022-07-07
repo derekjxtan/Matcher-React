@@ -6,8 +6,8 @@ function Home(props) {
             <div className='row-content'>
                 <h1>Welcome to Matcher.</h1>
                 <p>
-                    The purpose of this project is to provide a service for people to match 
-                    1 set of things to another set based on others input. Examples where this 
+                    The purpose of this project is to provide a service for people to generate 
+                    a maximum 1:1 matching between 2 separate sets of items. Examples where this 
                     can be used include: duty scheduling, issuing items based on preferences, 
                     assigning things to people, or any other applications that you can think 
                     of.

@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Input, Label, Button, Col } from "reactstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFolderPlus} from '@fortawesome/free-solid-svg-icons';
+
+function NewMatchPage(props) {
+    const navigate = useNavigate();
+
+    return (
+        <NewMatch postNewMatch={props.postNewMatch} navigate={navigate}/>
+    );
+}
 
 class NewMatch extends Component {
     constructor(props) {
@@ -22,6 +32,7 @@ class NewMatch extends Component {
         alert('New Match: ' + JSON.stringify(resp));
         this.props.postNewMatch(resp);
         event.preventDefault();
+        this.props.navigate('/matches', {replace: true});
     };
 
     cancel() {
@@ -83,7 +94,7 @@ class NewMatch extends Component {
                     <FormGroup row>
                         <Col md={12}  className='d-flex justify-content-end'>
                             <Button color='secondary' className="me-3" onClick={this.cancel}>Cancel</Button>
-                            <Button color='primary' type="submit" className="float-end">Create new Match</Button>
+                            <Button color='primary' type="submit" className="float-end"><FontAwesomeIcon icon={faFolderPlus} /> Create new Match</Button>
                         </Col>
                     </FormGroup>
                 </Form>
@@ -100,4 +111,4 @@ class NewMatch extends Component {
     }
 }
 
-export default NewMatch;
+export default NewMatchPage;

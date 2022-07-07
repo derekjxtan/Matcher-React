@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Button, NavItem, Nav, NavbarToggler, Collapse, NavLink, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse, faMagnifyingGlass, faComment, faCircleInfo, faRightToBracket, faRightFromBracket, faFolderPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends Component {
     constructor(props) {
@@ -72,32 +74,43 @@ class Header extends Component {
                         <Nav navbar>
                             <NavItem>
                                 <NavLink className='nav-link' href='/home'>
-                                    Home
+                                    <FontAwesomeIcon icon={faHouse} /> Home
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink className='nav-link' href='/newmatch'>
-                                    Create New Match
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink className='nav-link' href='/matches'>
-                                    Matches
-                                </NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink className='nav-link' href='/search'>
-                                    Search
-                                </NavLink>
-                            </NavItem>
+                            {
+                                this.props.Auth.isAuthenticated
+                                    ?
+                                        <NavItem>
+                                            <NavLink className='nav-link' href='/newmatch'>
+                                                <FontAwesomeIcon icon={faFolderPlus} /> Create New Match
+                                            </NavLink>
+                                        </NavItem>
+                                    :
+                                    <NavItem>
+                                        <NavLink className='nav-link' href='/search'>
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} /> Search
+                                        </NavLink>
+                                    </NavItem>
+                            }
+                            {
+                                this.props.Auth.isAuthenticated
+                                    ?
+                                    <NavItem>
+                                        <NavLink className='nav-link' href='/matches'>
+                                            <FontAwesomeIcon icon={faEye} /> Matches
+                                        </NavLink>
+                                    </NavItem>
+                                    :
+                                    <div></div>
+                            }
                             <NavItem>
                                 <NavLink className='nav-link' href='/Feedback'>
-                                    Feedback
+                                    <FontAwesomeIcon icon={faComment} /> Feedback
                                 </NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink className='nav-link' href='/about'>
-                                    About
+                                    <FontAwesomeIcon icon={faCircleInfo} /> About
                                 </NavLink>
                             </NavItem>
                         </Nav> 
@@ -107,12 +120,12 @@ class Header extends Component {
                                     !this.props.Auth.isAuthenticated ? 
                                     <div>
                                         <Button className='me-3' onClick={this.toggleRegister}>Register</Button>
-                                        <Button onClick={this.toggleLogin}>Login</Button>
+                                        <Button onClick={this.toggleLogin}><FontAwesomeIcon icon={faRightToBracket} /> Login</Button>
                                     </div>
                                     :
                                     <div className='d-flex justify-content-start'>
                                         <div className='navbar-text me-3'>Welcome, {this.props.Auth.username}</div>
-                                        <Button onClick={this.logout}>Logout</Button>
+                                        <Button onClick={this.logout}><FontAwesomeIcon icon={faRightFromBracket} /> Logout</Button>
                                     </div>
                                 }
                             </NavItem>

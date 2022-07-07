@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Input, Label, Button } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 class MatchSearchForm extends Component {
     constructor(props) {
@@ -13,8 +15,6 @@ class MatchSearchForm extends Component {
         // make a call to the server, 
         // if id exists then render the form for submission
         // otherwise just load input matchid again
-        const resp = JSON.stringify({matchid: this.matchid.value});
-        // alert('Search: ' + resp);
         this.props.fetchSingleMatch(this.matchid.value);
         event.preventDefault();
     }
@@ -42,7 +42,7 @@ class MatchSearchForm extends Component {
                         <Input type='text' name='matchid' id='matchid' placeholder='Match ID' innerRef={(input) => this.matchid = input}/>
                     </FormGroup>
                     <FormGroup>
-                        <Button color='primary' type="submit">Search</Button>
+                        <Button color='primary' type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} /> Search</Button>
                     </FormGroup>
                 </Form>
             </div>
@@ -63,7 +63,7 @@ class MatchSearchForm extends Component {
                 {
                     this.props.SingleMatch.match 
                         ?
-                        <Link to='input' className="btn btn-primary">Match Found, Click to proceed</Link>
+                        <Link to='input' className="btn btn-primary"><FontAwesomeIcon icon={faArrowRight} /> Match Found, Click to proceed</Link>
                         :
                         <div></div>
                 }

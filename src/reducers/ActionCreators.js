@@ -71,16 +71,47 @@ export const logoutUser = () => (dispatch) => {
     dispatch(logoutSuccess());
 };
 
+export const checkLogin = () => (dispatch) => {
+    const token = 'Bearer ' + localStorage.getItem('token');
+    if (!token) {
+        return;
+    }
+
+    return fetch(baseUrl + 'match', {
+        headers: {
+            'Authorization': token,
+        }
+    })
+    // if can fetch, do nothing
+    .then((resp) => {
+        if (resp.ok) {
+            console.log("Login Checked")
+        }
+        else {
+            dispatch(logoutUser());
+            var error = new Error("Login Session has expired, Log in again to continue");
+            return error;
+        }
+    })
+    .catch((err) => {
+        dispatch(logoutUser());
+        var error = new Error("Login Session has expired, Log in again to continue");
+        return error;
+    });
+};
+
 // TODO:
 // Fix error in cors, likely server side issue
 // last diagonsis: server cors.corsWithOptions not being called
 export const registerUser = (creds) => (dispatch) => {
+    console.log(creds);
     return fetch(baseUrl + 'users/register', {
         method: 'POST',
+        body: JSON.stringify(creds),
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(creds)
+        credentials: 'same-origin'
     })
     .then((resp) => {
         if  (resp.ok) {
@@ -154,7 +185,6 @@ export const fetchSingleMatch = (matchid) => (dispatch) => {
 };
 
 // ALL MATCHES actions
-// Match actions
 export const allMatchesLoading = () => ({
     type: ActionTypes.ALL_MATCHES_LOADING
 });
@@ -325,6 +355,8 @@ export const deleteSingleResponse = (matchid, responseid) => (dispatch) => {
 
 export const fetchResults = (matchid) => (dispatch) => {
     return fetch(baseUrl + 'match/' + matchid + '/result')
+    .then((resp) => resp.json())
+    .then((match) => dispatch(fetchAllMatches()))
     .catch((error) => {
         console.log('GET ressults', error.message);
         alert('Your results could not be generated\nError: ' + error.message);

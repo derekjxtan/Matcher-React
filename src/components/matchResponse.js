@@ -1,17 +1,12 @@
 import React, { Component } from "react";
+import { Loading } from "./loading";
 import { Breadcrumb, BreadcrumbItem, Button, Table } from "reactstrap";
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function ResponsesPage(props) {
     const { matchId } = useParams();
-    const navigate = useNavigate();
-
-    if (!props.AllMatches.matches.length) {
-        navigate('/matches', {replace: true});
-        return (
-            <div />
-        );
-    }
 
     return (
         <Responses match={props.AllMatches.matches.filter((match) => match._id === matchId)[0]} deleteAllResponses={props.deleteAllResponses} deleteSingleResponse={props.deleteSingleResponse}/>
@@ -61,7 +56,7 @@ class Responses extends Component {
                             <th>ID:</th>
                             <th>{this.props.match.set1label}</th>
                             <th>{this.props.match.set2label}</th>
-                            <td><Button color="danger" onClick={this.handleDeleteAll}>Delete All</Button></td>
+                            <td><Button color="danger" onClick={this.handleDeleteAll}><FontAwesomeIcon icon={faTrash} /> Delete All</Button></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +66,7 @@ class Responses extends Component {
                                     <td>{resp._id}</td>
                                     <td>{resp.parent}</td>
                                     <td>{resp.children.toString()}</td>
-                                    <td><Button color="danger" onClick={() => this.props.deleteSingleResponse(this.props.match._id, resp._id)}>Del</Button></td>
+                                    <td><Button color="danger" onClick={() => this.props.deleteSingleResponse(this.props.match._id, resp._id)}><FontAwesomeIcon icon={faTrash} /> Del</Button></td>
                                 </tr>
                             )
                         })}
@@ -84,7 +79,13 @@ class Responses extends Component {
             <div className="container">
                 <PageBreadcrumb />
                 <PageHeader />
-                <Responses />
+                {
+                    !this.props.match
+                        ?
+                        <Loading />
+                        :
+                        <Responses />
+                }
             </div>
         )
     }

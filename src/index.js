@@ -6,6 +6,7 @@ import Store from './reducers/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import './index.css';
 
 

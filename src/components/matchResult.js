@@ -1,17 +1,10 @@
 import React, { Component } from "react";
+import { Loading } from "./loading";
 import { Breadcrumb, BreadcrumbItem, Button, Table } from "reactstrap";
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function ResultsPage(props) {
     const { matchId } = useParams();
-    const navigate = useNavigate();
-
-    // if (!props.AllMatches.matches.length) {
-    //     navigate('/matches', {replace: true});
-    //     return (
-    //         <div />
-    //     );
-    // }
 
     return (
         <Results match={props.AllMatches.matches.filter((match) => match._id === matchId)[0]} fetchAllMatches={props.fetchAllMatches} fetchResults={props.fetchResults} />
@@ -29,10 +22,6 @@ class Results extends Component {
     handleGenerateResults(event) {
         this.props.fetchResults(this.props.match._id);
         event.preventDefault();
-    }
-
-    componentDidUpdate() {
-        this.props.fetchAllMatches();
     }
 
     render() {
@@ -89,7 +78,13 @@ class Results extends Component {
             <div className="container">
                 <PageBreadcrumb />
                 <PageHeader />
-                <Results />
+                {
+                    !this.props.match
+                        ?
+                        <Loading />
+                        :
+                        <Results />
+                }
             </div>
         )
     }

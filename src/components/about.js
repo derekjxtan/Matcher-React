@@ -35,7 +35,10 @@ function About(props) {
                 <h2>Back-end:</h2>
                 <p>
                     The backend server is create using the Express framework, to support REST API
-                    calls. 
+                    calls.
+                    <br></br>
+                    In order to produce the match, a Maximum Bipartite Match is produced. The alogrithm 
+                    used here is the Ford-Fulkerson Algorithm (Depth First Search is used within).
                 </p>
             </div>
             <div className='row-content'>

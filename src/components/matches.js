@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import { Breadcrumb, BreadcrumbItem, Button, Card, CardHeader, CardBody } from "reactstrap";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPencil, faEye } from '@fortawesome/free-solid-svg-icons';
 
 class Matches extends Component {
     constructor(props) {
@@ -34,10 +36,10 @@ class Matches extends Component {
                             <CardHeader className="d-flex">
                                 <h3>{match.name}</h3>
                                 <div className="ms-auto">
-                                    <Button color="danger" onClick={() => this.props.deleteSingleMatch(match._id)} className='me-2'>Delete</Button>
-                                    <Link to={`/matches/${match._id}/edit`} className='btn btn-primary me-2'>Edit</Link>
-                                    <Link to={`/matches/${match._id}/responses`} className='btn btn-success me-2'>View Responses</Link>
-                                    <Link to={`/matches/${match._id}/results`} className='btn btn-success'>View Results</Link>
+                                    <Button color="danger" onClick={() => this.props.deleteSingleMatch(match._id)} className='me-2'><FontAwesomeIcon icon={faTrash}/> Delete</Button>
+                                    <Link to={`/matches/${match._id}/edit`} className='btn btn-primary me-2'><FontAwesomeIcon icon={faPencil}/> Edit</Link>
+                                    <Link to={`/matches/${match._id}/responses`} className='btn btn-success me-2'><FontAwesomeIcon icon={faEye}/> View Responses</Link>
+                                    <Link to={`/matches/${match._id}/results`} className='btn btn-success'><FontAwesomeIcon icon={faEye}/> View Results</Link>
                                 </div>
                             </CardHeader>
                             <CardBody>

@@ -1,23 +1,16 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Input, Label, Button, Col } from "reactstrap";
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 
 function EditMatchPage(props) {
     const { matchId } = useParams();
     const navigate = useNavigate();
 
-    // if AllMatches.matches is empty, navigate back to /matches because it means that the page was reloaded
-    if (!props.AllMatches.matches.length) {
-        navigate('/matches', {replace: true});
-        return (
-            <div />
-        );
-    }
-    else {
-        return (
-            <EditMatch match={props.AllMatches.matches.filter((match) => match._id === matchId)[0]} putSingleMatch={props.putSingleMatch}/>
-        );
-    }
+    return (
+        <EditMatch match={props.AllMatches.matches.filter((match) => match._id === matchId)[0]} putSingleMatch={props.putSingleMatch} navigate={navigate}/>
+    );
 }
 
 class EditMatch extends Component {
@@ -51,6 +44,7 @@ class EditMatch extends Component {
         this.props.putSingleMatch(this.props.match._id, resp);
         alert(JSON.stringify(JSON.stringify(resp)));
         event.preventDefault();
+        this.props.navigate('/matches', {replace: true});
     }
 
     getDefaultItems(array) {
@@ -118,7 +112,7 @@ class EditMatch extends Component {
                     <FormGroup row>
                         <Col md={12}  className='d-flex justify-content-end'>
                             <Button color='secondary' className="me-3" onClick={this.cancel}>Cancel</Button>
-                            <Button color='primary' type="submit" className="float-end">Submit Changes</Button>
+                            <Button color='primary' type="submit" className="float-end"><FontAwesomeIcon icon={faPencil} /> Submit Changes</Button>
                         </Col>
                     </FormGroup>
                 </Form>

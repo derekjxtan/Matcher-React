@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
+function MatchInputSubmitPage(props) {
+    const navigate = useNavigate();
+
+    return (
+        <MatchInputSubmitForm SingleMatch={props.SingleMatch} postSingleResponse={props.postSingleResponse} navigate={navigate}/>
+    );
+}
 
 class MatchInputSubmitForm extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            choosen: []
-        }
 
         this.submitInput = this.submitInput.bind(this);
     }
@@ -23,6 +29,7 @@ class MatchInputSubmitForm extends Component {
         console.log(resp)
         this.props.postSingleResponse(this.props.SingleMatch.match._id, resp);
         event.preventDefault();
+        this.props.navigate('/search', {replace: true});
     }
 
     render() {
@@ -82,7 +89,7 @@ class MatchInputSubmitForm extends Component {
                         </ul>
                     </FormGroup>
                     <FormGroup>
-                        <Button color='primary' type="submit">Submit Response</Button>
+                        <Button color='primary' type="submit"><FontAwesomeIcon icon={faUpload}/> Submit Response</Button>
                     </FormGroup>
                 </Form>
             </div>
@@ -104,4 +111,4 @@ class MatchInputSubmitForm extends Component {
     }
 }
 
-export default MatchInputSubmitForm;
+export default MatchInputSubmitPage;
