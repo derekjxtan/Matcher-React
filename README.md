@@ -43,4 +43,40 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## App details
+
+The function of this app is to create a Maximum Bipartite Match using the Ford-Fulkerson Algorithm.
+
+### `Components`
+
+### For submitting responsed to matches
+
+Components used are matchSearchForm.js and matchInputSubmitForm.js. These components allow users to query matches using a provided match id and submit their own inputs to the queried match. Acessing these 2 component do not require users to log in before using.
+
+### For managing matches
+
+newMatch.js allows for users to create a new match.
+
+matches.js and matchResponse.js allows for users to view created matches and the responses submitted to each match.
+
+editMatch.js allows for users to make changes to created matches.
+
+matchResult.js allows for users to generate and view the results to their match.
+
+### `Action Creators`
+
+ActionCreators.js contains all action that are used in this react front-end app. They are supported by REST API endpoints created using Express [here](https://github.com/derekjxtan/Matcher-Express).
+
+### `Planned future improvement`
+
+### 1. Allow for maximum utilisation of second set of items
+
+Current implementation generates results by fully creating a single Maximum Bipartite Match. In some cases, where set 1 contains few items compared to set 2, most items in set 2 may be unutilised. An option would be provided to users to maximise usage of second set such that an item from set 1 can match to more than 1 item in set 2. 
+
+Implementation idea: Generate a Maximum Bipartite Match and save this result. Removed the items in set 2 that were used. Repeat the process.
+
+### 2. Allow for duplicate items in either set
+
+Current implementation does not allow duplicate items to be in a single set. In some cases, duplicate items may be needed (e.g. Assigning people to job openings. One job may have mulitple openings and set 2 in this case would have duplicated jobs.)
+
+Implementation idea: When there are duplicates, dictionary of set 2 items will store an array of nodes instead for a given key instead of only 1 node. When generating graph of matches, all of the nodes in the array will be connected to the item in set 1.
